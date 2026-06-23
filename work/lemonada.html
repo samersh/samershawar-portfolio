@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lemonada · Mobile App Case Study · Samer Shawar</title>
+<meta name="description" content="Lemonada is a gamified app where kids who sell lemonade track sales, learn entrepreneurship, and connect with other young sellers. End-to-end product design by Samer Shawar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  .palette-row { display:flex; flex-wrap:wrap; gap:0.8rem; margin:1.6rem 0 0.6rem; }
+  .swatch { width: 5.2rem; }
+  .swatch .chip { height: 3.4rem; border:1px solid var(--hairline); }
+  .swatch .hex { font-family: var(--font-mono); font-size:0.62rem; letter-spacing:0.06em; color:var(--ink-faint); padding-top:0.4rem; display:block; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main">
+  <a class="nav-sig" href="../index.html" aria-label="Samer Shawar, home">
+    <img src="../assets/img/signature.png" alt="Samer Shawar signature">
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work">Work</a></li>
+    <li class="hide-mobile"><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <span class="nav-status">Case study 03 / 13</span>
+</nav>
+
+<main>
+<header class="case-hero">
+  <p class="crumbs"><a href="../index.html#work">Work</a> <span class="sep">/</span> Mobile App <span class="sep">/</span> Gamified entrepreneurship</p>
+  <h1>Lemon<em>ada</em></h1>
+  <p class="dek">The lemonade stand is many kids’ first business. Lemonada treats it that way.
+    A playful platform where young sellers track sales and inventory, compete with stands in other
+    neighborhoods, and learn entrepreneurship and financial literacy without noticing they’re learning.</p>
+</header>
+
+<dl class="case-meta reveal">
+  <div><dt>Role</dt><dd>End-to-end product design, IA, flows, wireframes, UI, character & gamification</dd></div>
+  <div><dt>Domain</dt><dd>Mobile app · Designing for children</dd></div>
+  <div><dt>Methods</dt><dd>Information architecture, user flows, wireframing, color psychology, gamification design</dd></div>
+  <div><dt>Audience</dt><dd>Young entrepreneurs, kids selling lemonade (and their parents)</dd></div>
+  <div><dt>Context</dt><dd>Independent product project</dd></div>
+  <div><dt>Outcome</dt><dd>Higher engagement and knowledge retention for kids</dd></div>
+</dl>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/lemonada-hero.jpg" alt="Two phones on a yellow ground: the Lemonada sign-in screen with the lemon mascot, and the sales report screen">
+  <figcaption>Lemonada: sales tracking, community, and learning wrapped in lemon yellow.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Concept</span>
+  <div class="case-body reveal">
+    <h2>A business tool kids <em>want</em> to open</h2>
+    <p>Youngsters who sell lemonade want to keep track of their sales, and to interact with other
+      children who sell it too. Lemonada is not just a tracking tool: it’s a vibrant community
+      where kids connect, share experiences, and learn from each other through interactive
+      tutorials and gamified learning experiences.</p>
+    <p>The app handles real-time sales tracking, expense monitoring, and profit calculations,
+      teaching the basics of entrepreneurship and financial literacy from a young age while
+      keeping every interaction accessible and engaging for kids. The deeper ambition: developing
+      life-long skills in a fun, supportive environment, and a stepping stone in a child’s
+      journey toward understanding business.</p>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">Structure</span>
+  <div class="case-body reveal">
+    <h2>Architecture before <em>aesthetics</em></h2>
+    <p>In the initial phase I meticulously crafted the application’s information architecture,
+      a clear roadmap of the information flow that delineates the user’s journey throughout the
+      app. This foundational work not only clarified the overall structure and navigational
+      scheme, it significantly streamlined everything that followed: with the blueprint set early,
+      the wireframing phase proceeded with greater ease and precision.</p>
+    <p>The flow branches from the homepage into four limbs, <strong>Feed, Chat, Sales, and
+      Report:</strong> with the sales limb carrying the working tools: add and subtract lemonade,
+      daily/weekly/monthly views, sales chart, location, and download.</p>
+  </div>
+</section>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/lemonada-flow.jpg" alt="User flow diagram branching from sign-up and homepage into feed, chat, sales, and report sections">
+  <figcaption>The user flow: four limbs from one homepage, tools exactly where a young seller expects them.</figcaption>
+</figure>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/lemonada-wireframes.jpg" alt="Annotated low-fidelity phone wireframes covering onboarding, sales counter, messaging, and feed screens">
+  <figcaption>Annotated wireframes: translating the abstract architecture into tangible skeletal screens.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Color</span>
+  <div class="case-body reveal">
+    <h2>A palette doing <em>psychological</em> work</h2>
+    <p>Light greens, yellow, light blue, and white, chosen deliberately for an app where children
+      manage money:</p>
+    <div class="palette-row" aria-label="Lemonada color palette">
+      <span class="swatch"><span class="chip" style="background:#43FF95"></span><span class="hex">#43FF95</span></span>
+      <span class="swatch"><span class="chip" style="background:#FFE600"></span><span class="hex">#FFE600</span></span>
+      <span class="swatch"><span class="chip" style="background:#6EB6FF"></span><span class="hex">#6EB6FF</span></span>
+      <span class="swatch"><span class="chip" style="background:#EFFFF6"></span><span class="hex">#EFFFF6</span></span>
+      <span class="swatch"><span class="chip" style="background:#F4FAFF"></span><span class="hex">#F4FAFF</span></span>
+    </div>
+    <ul>
+      <li><strong>Positive engagement:</strong> bright yellow and greens create an inviting, fun atmosphere that encourages kids to engage enthusiastically.</li>
+      <li><strong>Calm and focus:</strong> light greens calm the stress out of managing sales while keeping kids focused.</li>
+      <li><strong>Trust and security:</strong> light blue lends the sense of trust and reliability that makes the app feel safe for kids and their parents.</li>
+      <li><strong>Growth and creativity:</strong> nature-inspired greens symbolize growth and renewal, encouraging new ideas for their stands.</li>
+      <li><strong>A user-friendly canvas:</strong> white backgrounds keep the aesthetic clean and minimal, reducing cognitive overload for young users.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">Gamification</span>
+  <div class="case-body reveal">
+    <h2>A rival in every <em>neighborhood</em></h2>
+    <p>To enhance engagement and foster a competitive spirit among young entrepreneurs, I
+      integrated gamification into the heart of the app: youngsters are motivated to outdo their
+      own lemonade sales in their locale while staying informed about sales activity in other
+      areas, spurring them to climb levels and reach higher within the app.</p>
+    <p>To give the application a distinctive personality, I created a <strong>character that acts as
+      the face of the app:</strong> appearing across settings and displaying a range of emotions,
+      adding depth and versatility to the app’s functionality while keeping the experience
+      unmistakably for kids.</p>
+    <div class="method-row" aria-label="Methods used">
+      <span class="method-chip">Information architecture</span>
+      <span class="method-chip">User flows</span>
+      <span class="method-chip">Wireframing</span>
+      <span class="method-chip">Gamification</span>
+      <span class="method-chip">Character design</span>
+    </div>
+  </div>
+</section>
+
+<div class="case-pull reveal">
+  <blockquote>The essence of gamification lies in its ability to spur children on, encouraging
+    them to increase their sales and achieve higher levels within the app.</blockquote>
+  <cite>design rationale, Lemonada</cite>
+</div>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/lemonada-screens.jpg" alt="Grid of high-fidelity Lemonada screens: sign-in, feed, sales counter, leveling profile, chat with map sharing, and price editing">
+  <figcaption>The high-fidelity system: feed, sales counter, levels, chat, and reports in the final palette.</figcaption>
+</figure>
+</main>
+
+<nav class="case-next reveal" aria-label="Next case study">
+  <a href="modeling-ui.html">
+    <span class="mono-label">Next case study · 04</span>
+    <span class="next-title">3D Modeling UI</span>
+  </a>
+</nav>
+
+<footer class="mini-footer">
+  <a href="../index.html#work">← All work</a>
+  <span>Samer Shawar · © <span data-year>2026</span></span>
+  <a href="mailto:samer.shawar@gmail.com">samer.shawar@gmail.com</a>
+</footer>
+
+<script src="../assets/js/three.min.js"></script>
+<script src="../js/bg.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

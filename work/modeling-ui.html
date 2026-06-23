@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Modeling UI · One-Week SaaS CAD Interface · Samer Shawar</title>
+<meta name="description" content="A one-week challenge: design a browser-based 3D modeling interface for mechanical and industrial engineers, grounded in interviews, desk research, and CAD usability literature. Case study by Samer Shawar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main">
+  <a class="nav-sig" href="../index.html" aria-label="Samer Shawar, home">
+    <img src="../assets/img/signature.png" alt="Samer Shawar signature">
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work">Work</a></li>
+    <li class="hide-mobile"><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <span class="nav-status">Case study 04 / 13</span>
+</nav>
+
+<main>
+<header class="case-hero">
+  <p class="crumbs"><a href="../index.html#work">Work</a> <span class="sep">/</span> SaaS · CAD <span class="sep">/</span> One-week challenge</p>
+  <h1>3D Modeling <em>UI</em></h1>
+  <p class="dek">One week to design a browser-based 3D modeling interface for mechanical and
+    industrial engineers, a professional tool with an expansive viewport, built for users who
+    need advanced functionality, not casual hobbyists. The constraint made the method matter more.</p>
+</header>
+
+<dl class="case-meta reveal">
+  <div><dt>Role</dt><dd>Solo designer, research, concept, interaction, UI in one week</dd></div>
+  <div><dt>Domain</dt><dd>SaaS · CAD / 3D parametric design</dd></div>
+  <div><dt>Methods</dt><dd>Kanban, user interviews, desk research, persona, empathy map, A/B testing, heuristic evaluation</dd></div>
+  <div><dt>Audience</dt><dd>Mechanical & industrial engineers</dd></div>
+  <div><dt>Context</dt><dd>One-week design challenge</dd></div>
+  <div><dt>Outcome</dt><dd>A research-backed CAD interface, built in one week</dd></div>
+</dl>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/modeling-wire-1.jpg" alt="Browser-based 3D modeling interface: an expansive viewport with a model on the grid, a tool rail at the left, and a parameter panel at the right">
+  <figcaption>The interface: viewport first, tools at the rail, parameters where the eyes already are.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Challenge</span>
+  <div class="case-body reveal">
+    <h2>Pro-grade CAD, <em>in a browser, in a week</em></h2>
+    <p>The brief: craft an interface for a 3D modeling software delivered as Software-as-a-Service
+      via web browsers, empowering users to create intricate 3D elements. I focused not just on
+      meeting the provided specifications but on conceptualizing the design’s structure, detailing
+      the interactions, and making the thought process behind each decision explicit.</p>
+    <p>Two commitments framed the work: design for <strong>users who require advanced functionality</strong>
+      rather than casual hobbyists, and guard the software’s <strong>capacity for future
+      enhancement:</strong> in features and platform compatibility, so the design accommodates
+      evolving user needs and technological advancement.</p>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">Process</span>
+  <div class="case-body reveal">
+    <h2>A week run on <em>Kanban</em></h2>
+    <p>To monitor progression I ran the project on the Kanban agile methodology, a fluid,
+      adaptable workflow for a compressed timeline. Within the week, the design thinking process
+      still encompassed a full series of interviews, research, user studies, evaluations, and A/B
+      testing: user-centric and data-informed, with iterative improvements and strategic
+      decision-making to the last day.</p>
+    <div class="method-row" aria-label="Methods used">
+      <span class="method-chip">Kanban</span>
+      <span class="method-chip">User interviews</span>
+      <span class="method-chip">Desk research</span>
+      <span class="method-chip">Persona</span>
+      <span class="method-chip">Empathy map</span>
+      <span class="method-chip">A/B testing</span>
+    </div>
+  </div>
+</section>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/modeling-kanban.jpg" alt="Kanban board with To Do, In Progress, and Completed columns tracking research and design tasks">
+  <figcaption>The week’s Kanban: research, persona, empathy map, and evaluation moving across the board.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Research</span>
+  <div class="case-body reveal">
+    <h2>Five interviews, <em>one literature</em></h2>
+    <p>Constrained by time, I conducted five user interviews, and engineered around the
+      limitation: a question guide of open-ended questions enabled semi-structured interviews,
+      conducted via video call under pandemic conditions, each recorded with explicit participant
+      consent strictly for research purposes. Ethics aren’t a luxury feature of fast research.</p>
+    <p>Desk research anchored the interviews in the CAD usability literature: working on
+      three-dimensional layouts through a two-dimensional screen is one of the classic interface
+      problems in engineering tools. Following Lee&nbsp;et&nbsp;al., the top CAD UI issues range
+      across dialog boxes, drawings and reports, modeling, domain terminology, view and
+      navigation, menus and toolbars, and their three families of principles (general system
+      design, 3D-parametric-specific, and user support) later structured my evaluation. Notably,
+      Nielsen Norman Group’s ten heuristics serve simple desktop and mobile software well, but
+      do not stretch to the interface of a sophisticated 3D system.</p>
+  </div>
+</section>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/modeling-cad-issues.jpg" alt="Pie chart of reported CAD interface issues: Modeling 26%, Dialog box 25%, Terminology 17%, Help 8%, Drawing and report 8%, Menu items 5%, Toolbar 5%, Others 4%, View and navigation 2%">
+  <figcaption>Where CAD interfaces fail users, from the literature: modeling, dialog boxes, and terminology lead the complaints.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Persona</span>
+  <div class="case-body reveal">
+    <h2>Meet <em>Fabian</em></h2>
+    <p>The research converged on one person: Fabian, 35, a mechatronics engineer in Köln who makes
+      at a local hackerspace one day a week. He moves between Inventor, SolidWorks, SketchUp, and
+      Fusion, picks up new skills from YouTube, and loses time hunting through crowded menus for the
+      one tool he needs. His goals, behaviours, pain points, and motivations kept the design honest:
+      built for a capable professional with very little time to waste.</p>
+  </div>
+</section>
+
+<figure class="case-figure bleed reveal">
+  <img src="../assets/img/modeling-persona.jpg" alt="Persona sheet for Fabian, a 35-year-old mechatronics engineer in Köln: bio, behaviour, goals, pain points, personality, and motivation">
+  <figcaption>The persona: Fabian, the capable, time-poor maker the interface is built for.</figcaption>
+</figure>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/modeling-empathy.jpg" alt="Four-quadrant empathy map: says, thinks, feels, does, built around the engineer persona">
+  <figcaption>The empathy map: says, thinks, feels, does, summarizing the persona and qualitative data.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Design</span>
+  <div class="case-body reveal">
+    <h2>From persona to <em>viewport</em></h2>
+    <p>The interviews produced an engineer persona and an empathy map split into its four
+      quadrants, a glimpse into who the user is as a whole, keeping the design user-centered
+      rather than feature-centered. The interface that followed is guided by fundamental design
+      principles: an expansive modeling viewport at the center, a consistent tool rail, parameter
+      controls beside the model tree, and terminology that matches the engineer’s domain rather
+      than the developer’s.</p>
+    <p>The design was then evaluated against the same principles the literature provided, closing
+      the loop between desk research and the finished screens.</p>
+  </div>
+</section>
+
+<div class="case-grid-2 reveal">
+  <figure>
+    <img src="../assets/img/modeling-wire-1.jpg" alt="The default 3D modeling workspace: viewport, tool rail, and parameter panel">
+    <figcaption>The default workspace, model centered in the viewport.</figcaption>
+  </figure>
+  <figure>
+    <img src="../assets/img/modeling-wire-2.jpg" alt="The same workspace with the projects rail expanded on the left, showing project thumbnails and import or export controls">
+    <figcaption>The projects rail expanded: switch files, import, and export without leaving the canvas.</figcaption>
+  </figure>
+</div>
+
+<div class="case-pull reveal">
+  <blockquote>One week is not enough time to skip the research. It’s exactly why
+    the research had to be sharper.</blockquote>
+  <cite>process reflection</cite>
+</div>
+</main>
+
+<nav class="case-next reveal" aria-label="Next case study">
+  <a href="glimpses-from-palestine.html">
+    <span class="mono-label">Next case study · 05</span>
+    <span class="next-title">Glimpses from Palestine</span>
+  </a>
+</nav>
+
+<footer class="mini-footer">
+  <a href="../index.html#work">← All work</a>
+  <span>Samer Shawar · © <span data-year>2026</span></span>
+  <a href="mailto:samer.shawar@gmail.com">samer.shawar@gmail.com</a>
+</footer>
+
+<script src="../assets/js/three.min.js"></script>
+<script src="../js/bg.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glimpses from Palestine · VR Case Study · Samer Shawar</title>
+<meta name="description" content="A VR application that lets Palestinian refugees revisit demolished villages, reconstructed from archival photographs and maps. Master thesis case study by Samer Shawar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main">
+  <a class="nav-sig" href="../index.html" aria-label="Samer Shawar, home">
+    <img src="../assets/img/signature.png" alt="Samer Shawar signature">
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work">Work</a></li>
+    <li class="hide-mobile"><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <span class="nav-status">Case study 05 / 13</span>
+</nav>
+
+<main>
+<header class="case-hero">
+  <p class="crumbs"><a href="../index.html#work">Work</a> <span class="sep">/</span> VR <span class="sep">/</span> Master Thesis</p>
+  <h1>Glimpses from <em>Palestine</em></h1>
+  <p class="dek">Since 1948, Palestinian refugees have been unable to return home, not even for a visit,
+    and most of their villages have been demolished. This VR application lets users travel through
+    today’s Palestine and back in time, into villages digitally rebuilt from old photographs and maps.</p>
+</header>
+
+<dl class="case-meta reveal">
+  <div><dt>Role</dt><dd>Everything, idea, research, design, build, evaluation (Master thesis)</dd></div>
+  <div><dt>Domain</dt><dd>Virtual Reality · Mobile VR</dd></div>
+  <div><dt>Methods</dt><dd>Design case studies, interviews, expert interviews in VR, thinking aloud, usability testing</dd></div>
+  <div><dt>Tools</dt><dd>Unity, 3D modeling, archival photo & map research</dd></div>
+  <div><dt>Context</dt><dd>M.Sc. HCI, Universität Siegen</dd></div>
+  <div><dt>Outcome</dt><dd>Built, usability-tested, and published at ACM</dd></div>
+</dl>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/glimpses-1.jpg" alt="The VR location menu, a curved wall of destinations: Jaffa, Haifa, Jerusalem, Jericho, Nablus, Ramallah, Acre">
+  <figcaption>The spatial location menu: Jaffa, Haifa, Jerusalem, Jericho, Nablus, Ramallah, Acre, inside the headset.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Context</span>
+  <div class="case-body reveal">
+    <h2>A homeland you can only <em>remember</em></h2>
+    <p>Palestine has lived in political conflict for decades. For the refugees of 1948 and their
+      descendants, return is impossible, the villages they came from were largely demolished, and
+      with each passing generation the living memory of those places fades.</p>
+    <p>The design question was delicate: <strong>can immersive technology carry a place that no longer
+      exists to the people who are not allowed to stand in it?</strong> This was not an entertainment
+      brief. It demanded historical accuracy, emotional care, and a research method that put the
+      diaspora’s own memories at the center.</p>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">Research</span>
+  <div class="case-body reveal">
+    <h2>Interviews across the diaspora</h2>
+    <p>I followed a design case study methodology, grounding every decision in qualitative data:</p>
+    <ul>
+      <li><strong>Interviews with Palestinians in the diaspora:</strong> including people who had lived in the demolished villages themselves.</li>
+      <li><strong>Interviews with non-Palestinians:</strong> to incorporate outside perspectives and check assumptions.</li>
+      <li><strong>Expert interviews conducted inside VR:</strong> evaluating the medium with the medium.</li>
+      <li><strong>Thinking aloud:</strong> to surface user needs and requirements as people moved through the prototype.</li>
+    </ul>
+    <div class="method-row" aria-label="Methods used">
+      <span class="method-chip">Design case studies</span>
+      <span class="method-chip">Diaspora interviews</span>
+      <span class="method-chip">Expert interviews in VR</span>
+      <span class="method-chip">Thinking aloud</span>
+      <span class="method-chip">Usability testing</span>
+    </div>
+  </div>
+</section>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/glimpses-2.jpg" alt="A hand pointing at a village on an archival aerial photograph">
+  <figcaption>Primary sources: locating the demolished village on archival aerial photographs before reconstruction.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Design</span>
+  <div class="case-body reveal">
+    <h2>Travelling in space, <em>and in time</em></h2>
+    <p>The application has two journeys. The first moves through space: 360° video from various
+      locations and cities in Palestine today, letting users visit places they cannot physically reach.</p>
+    <p>The second moves through time: villages that no longer exist were <strong>remodeled in 3D from
+      old photographs and historical maps</strong>, placed at their true locations. Users stand in the
+      village as it looked before its destruction, a reconstruction, not an imagination.</p>
+    <p>The capture process combined <strong>photogrammetry and 360° video</strong> across sites, and the
+      central UX challenge was stitching these massive environments into a seamless, navigable
+      narrative without causing simulator sickness. A spatial UI lets users organically explore
+      the heritage spaces while listening to <strong>embedded local oral histories</strong>.</p>
+    <p>Mobile VR was a deliberate choice: the audience is a global diaspora, and the experience had
+      to run on hardware people actually own, and during public exhibitions, performance was
+      tuned until it ran smoothly even on standalone headsets.</p>
+  </div>
+</section>
+
+<div class="case-pull reveal">
+  <blockquote>The brief was never “build a VR app.” It was: return a demolished village to the
+    people who remember it.</blockquote>
+  <cite>design intent, master thesis</cite>
+</div>
+
+<figure class="case-figure reveal">
+  <img src="../assets/img/glimpses-3.jpg" alt="Field testing in a public square, a participant looks through a cardboard VR viewer while researchers take notes">
+  <figcaption>Field testing in public: thinking aloud with the prototype, notes in hand.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Outcome</span>
+  <div class="case-body reveal">
+    <h2>From idea to <em>tested</em> prototype</h2>
+    <p>As my master thesis, this project was mine end to end: framing the research question,
+      conducting and analyzing the interviews, designing the experience, building the prototype,
+      and closing the loop with usability testing.</p>
+    <p>It remains the clearest expression of how I work, <strong>rigorous methods applied to a deeply
+      human problem, finished as a working artifact rather than a slide deck.</strong></p>
+    <p>The research was later published at ACM as
+      <a href="https://dl.acm.org/doi/10.1145/3742800.3742850" target="_blank" rel="noopener noreferrer" style="color:var(--signal)">
+      “Glimpses from Palestine: Preserving the Inaccessible in VR Technology”</a>, Shawar, Aal &
+      Wulf, carrying the work from prototype to peer-reviewed literature.</p>
+  </div>
+</section>
+</main>
+
+<nav class="case-next reveal" aria-label="Next case study">
+  <a href="babylon.html">
+    <span class="mono-label">Next case study · 06</span>
+    <span class="next-title">Babylon</span>
+  </a>
+</nav>
+
+<footer class="mini-footer">
+  <a href="../index.html#work">← All work</a>
+  <span>Samer Shawar · © <span data-year>2026</span></span>
+  <a href="mailto:samer.shawar@gmail.com">samer.shawar@gmail.com</a>
+</footer>
+
+<script src="../assets/js/three.min.js"></script>
+<script src="../js/bg.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>
