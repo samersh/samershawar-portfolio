@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Gate · Constraint-Driven UX for a BLE Gate Opener · Samer Shawar</title>
+<meta name="description" content="Designing a Bluetooth gate controller for elderly users, working around the physics of a metal gate and the constraints of two mobile ecosystems. Hardware + mobile UX case study by Samer Shawar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main">
+  <a class="nav-sig" href="../index.html" aria-label="Samer Shawar, home">
+    <img src="../assets/img/signature.png" alt="Samer Shawar signature">
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work">Work</a></li>
+    <li class="hide-mobile"><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <span class="nav-status">Case study 01 / 14</span>
+</nav>
+
+<main>
+<header class="case-hero">
+  <p class="crumbs"><a href="../index.html#work">Work</a> <span class="sep">/</span> Hardware × Mobile <span class="sep">/</span> Constraint-driven UX</p>
+  <h1>Home <em>Gate</em></h1>
+  <p class="dek">Opening a gate should take one tap. A Bluetooth gate controller for elderly users,
+    designed around the physics of a metal gate and the constraints of two mobile ecosystems.</p>
+</header>
+
+<dl class="case-meta reveal">
+  <div><dt>Role</dt><dd>Solo project: research, product, UX, mobile, firmware</dd></div>
+  <div><dt>Domain</dt><dd>Hardware × Mobile · IoT</dd></div>
+  <div><dt>Year</dt><dd>2026</dd></div>
+  <div><dt>Platform</dt><dd>iOS · Android (Flutter, BLE)</dd></div>
+  <div><dt>Hardware</dt><dd>ESP32 relay into a Beninca gate controller</dd></div>
+  <div><dt>Outcome</dt><dd>Used daily by an elderly relative who never asks how it works</dd></div>
+</dl>
+
+<figure class="case-figure reveal">
+  <div class="phone-trio" style="margin:0">
+    <div class="phone-frame"><img src="../assets/img/hg-app-closed.jpg" alt="Home Gate app, gate CLOSED: a green padlock, status card reading CLOSED, and a large green OPEN button"></div>
+    <div class="phone-frame"><img src="../assets/img/hg-app-opening.jpg" alt="Home Gate app, gate OPENING: an amber up-arrow and status card reading OPENING"></div>
+    <div class="phone-frame"><img src="../assets/img/hg-app-open.jpg" alt="Home Gate app, gate OPEN: a red unlocked padlock and status card reading OPEN"></div>
+  </div>
+  <figcaption>Three states, one glance: closed, opening, open. The status card answers the only question a driver has.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Problem</span>
+  <div class="case-body reveal">
+    <h2>The clicker everyone <em>keeps losing</em></h2>
+    <p>A traditional gate remote is a small plastic clicker you keep in your car. Batteries die. It
+      slips between the seats. You leave it at the office. And when family comes over, there is only
+      ever one of them.</p>
+    <p>My family had exactly this problem: several people, elderly relatives among them, all needing
+      to open the same home gate, usually from a car pulling into the driveway. Every existing option
+      carried friction: a wall intercom you had to walk to, a GSM opener that meant dialling a phone
+      number, or the clicker itself, which everyone kept losing.</p>
+    <p><strong>Success looked like one sentence:</strong> an elderly family member, with no technical
+      training, pulls up to the gate, glances at their phone, taps one button, and the gate opens.
+      That is the entire user journey.</p>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">Constraints</span>
+  <div class="case-body reveal">
+    <h2>The interesting part wasn’t the <em>app</em></h2>
+    <p>The app was the easy half. The real design work lived in the physical and human constraints
+      that shaped every decision, and most of them were invisible until I hit them.</p>
+    <ul>
+      <li><strong>Metal blocks radio.</strong> The gate motor’s controller sits behind a metal sliding
+        gate. Closed, it is effectively a Faraday cage: the metal reflects and absorbs 2.4&nbsp;GHz
+        signal and range collapses. No spec sheet warned me; I only saw it when the Bluetooth
+        connection dropped the moment I stepped outside. RF physics does not care about your roadmap.</li>
+      <li><strong>Elderly users will not tolerate friction.</strong> An account, a PIN on every open, a
+        scan to sit through, a “connection status” to interpret, any one of these would have killed
+        adoption. I had to treat every tap beyond the first as a failure.</li>
+      <li><strong>iOS and Android disagree about Bluetooth.</strong> iOS does not support classic
+        Bluetooth SPP, the easy path in most ESP32 tutorials. To work on iPhone the app had to use
+        Bluetooth Low Energy, a different protocol with different code on both the phone and the
+        hardware. Cross-platform was a hard requirement, not a nice-to-have.</li>
+      <li><strong>Public distribution was not simple.</strong> A gate opener that only works with my
+        specific ESP32 fits Apple’s rejection criteria almost perfectly: “requires additional hardware
+        not available to reviewers.” That shaped both the copy and the app’s actual behaviour.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">Research</span>
+  <div class="case-body reveal">
+    <h2>Being your own user, for a while</h2>
+    <p>The primary users were people in my own home. I lived with them and watched how they used the
+      old remote every day. A few observations reshaped the design:</p>
+    <ul>
+      <li>They rarely opened the app “from cold.” The phone was already in hand, coming out of a
+        pocket at the last moment as they approached.</li>
+      <li>The stressful moment was pulling up with someone honking behind them. Any delay felt
+        catastrophic.</li>
+      <li>They would not wait through a splash screen or an animation. Static beat motion.</li>
+      <li>They wanted proof the gate had received the command, immediately and visibly.</li>
+    </ul>
+    <p>The brief compressed to this: <strong>you have less than one second between the tap and the
+      thought “it worked.” Everything else is failure.</strong></p>
+  </div>
+</section>
+
+<div class="case-pull reveal">
+  <blockquote>No amount of user interviews would have surfaced the “car pulling up with someone
+    honking behind you” moment. Being your own user is a legitimate research method.</blockquote>
+  <cite>research reflection</cite>
+</div>
+
+<section class="case-section">
+  <span class="label">Design</span>
+  <div class="case-body reveal">
+    <h2>Every tap beyond the first is a <em>failure</em></h2>
+    <p>Each decision traces back to that one-second budget:</p>
+    <ul>
+      <li><strong>One primary action.</strong> A single large green OPEN button owns more than a third
+        of the screen. Close exists but is visually secondary, closing manually is rare in practice.</li>
+      <li><strong>Live status, not a spinner.</strong> A card at the top shows gate state in colour:
+        CLOSED green, OPEN red, OPENING amber. Users see the result of their action, not a loading
+        indicator.</li>
+      <li><strong>Optimistic UI.</strong> Tapping OPEN shows OPENING instantly, before the gate reports
+        back. The feedback loop feels immediate even though the physical response takes a second or two.</li>
+      <li><strong>Auto-connect, no scan screen.</strong> Opening the app immediately begins searching.
+        There is no “connect” tap, no device picker, the app either finds the gate or shows an error.</li>
+      <li><strong>Dark by default.</strong> People use this at night, in cars, in bright sun. Dark mode
+        with strong colour-coded states survives more lighting conditions than light mode does.</li>
+      <li><strong>No PIN, no account.</strong> Security comes from physical BLE range and the private
+        tester group. A PIN would have added constant friction for zero real security gain here.</li>
+    </ul>
+  </div>
+</section>
+
+<figure class="case-figure reveal" style="margin-top:clamp(2rem,5vh,3rem)">
+  <div class="phone-frame" style="max-width:15rem;margin:0 auto">
+    <img src="../assets/img/hg-app-permissions.jpg" alt="Home Gate app permission state: a Bluetooth glyph, the text Checking permissions, and a Try Again button">
+  </div>
+  <figcaption>The only intermediate state that exists: a clear Bluetooth permission prompt with one action, Try Again.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Hardware</span>
+  <div class="case-body reveal">
+    <h2>A virtual finger on the <em>wall button</em></h2>
+    <p>The app is only half the product. The gate is triggered by an ESP32 wired to the existing
+      Beninca controller’s step-by-step input. The ESP32 acts as a virtual remote button: when its
+      relay fires, the controller sees exactly the same signal as a press of the wired wall button.</p>
+    <ul>
+      <li><strong>Non-invasive integration.</strong> The ESP32 sits in parallel with the wall button.
+        If it ever fails, the wall button still works. Nothing about the original installation changed.</li>
+      <li><strong>Placement beats antenna power.</strong> I first tried boosting BLE transmit power in
+        software; the gain was tiny. Physically moving the ESP32 out of the metal enclosure improved
+        range five-fold. Hardware placement is a UX decision.</li>
+      <li><strong>Power stability.</strong> Enabling Bluetooth browned out the ESP32 on weak USB
+        sources. A dedicated 5V supply fixed reliability problems that had looked like software bugs.</li>
+    </ul>
+  </div>
+</section>
+
+<figure class="case-figure bleed reveal">
+  <img src="../assets/img/hg-hw-bench.jpg" alt="Prototype bench: the ESP32 relay board wired to an Arduino UNO with jumper wires on a desk">
+  <figcaption>On the bench: the ESP32 relay board, prototyped and triggered before it ever went near the gate.</figcaption>
+</figure>
+
+<div class="case-grid-2 reveal">
+  <figure>
+    <img src="../assets/img/hg-hw-installed.jpg" alt="The ESP32 relay board mounted at the gate, powered by red and black wires from a supply">
+    <figcaption>Installed and powered: relocated out of the metal enclosure to keep the signal alive.</figcaption>
+  </figure>
+  <figure>
+    <img src="../assets/img/hg-hw-wiring.jpg" alt="Close-up of the relay board wiring: the screw terminal and relays that mimic the wall button press">
+    <figcaption>Wired in parallel with the wall button: the relay the controller reads as a human press.</figcaption>
+  </figure>
+</div>
+
+<section class="case-section">
+  <span class="label">Distribution</span>
+  <div class="case-body reveal">
+    <h2>Getting it onto <em>family phones</em></h2>
+    <p>Building the app was only part of it. Getting it onto family members’ phones, iPhones and
+      Androids held by non-technical people, needed its own strategy.</p>
+    <p><strong>Android</strong> uses Google Play’s Internal Testing track: family tap an install link
+      and the app arrives like any normal app, with automatic updates, for a one-time developer fee.</p>
+    <p><strong>iOS</strong> started on TestFlight, which works but expires builds every 90 days. To end
+      that cycle I pursued full App Store distribution, which meant a demo mode for reviewers without
+      the hardware, a publicly hosted privacy policy, screenshots for several device sizes, and copy
+      that framed the app as a generic Bluetooth relay controller rather than a niche personal tool.</p>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">Reflection</span>
+  <div class="case-body reveal">
+    <h2>What I would do <em>differently</em></h2>
+    <p>Being honest about the parts that did not go smoothly:</p>
+    <ul>
+      <li><strong>I optimised before validating placement.</strong> I tuned code and weighed antenna
+        upgrades before physically moving the ESP32 out from behind the metal gate. Twenty minutes of
+        relocation would have saved days of software debugging.</li>
+      <li><strong>I built a PIN screen I didn’t need.</strong> It looked like the responsible choice and
+        was pure friction for zero security gain, anyone with range and the app already had access. One
+        conversation with an elderly user beforehand would have caught it.</li>
+      <li><strong>Cross-platform tooling didn’t reduce cross-platform overhead.</strong> Flutter wrote
+        the app quickly, but privacy policy, code signing, Bundle IDs, and App Store submission ate more
+        time than the app itself. The overhead moved, it didn’t vanish.</li>
+      <li><strong>I underestimated the status indicator.</strong> The first prototype was just a button,
+        and users tapped it repeatedly because they weren’t sure it worked. The status card was the
+        single highest-impact addition.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">Outcome</span>
+  <div class="case-body reveal">
+    <h2>The best interfaces are the ones people <em>stop noticing</em></h2>
+    <p>The app now runs on several family iPhones and Android phones. My elderly relative uses it every
+      day and has never asked how it works, which is the best measurable outcome I could hope for. The
+      gate opens as they approach. The friction they used to accept, hunting for the clicker, dead
+      batteries, the walk to the intercom, has quietly disappeared.</p>
+    <p>The deeper lesson: UX for hardware is inseparable from the physics of the hardware. A design that
+      works on the whiteboard breaks when the radio can’t get through a metal gate. A “simple app” gets
+      shaped, over months, by where you mount the microcontroller and how many amps the charger
+      provides. The strongest decisions came from living with the product, not from a brief.</p>
+  </div>
+</section>
+
+<div class="case-pull reveal">
+  <blockquote>The best interfaces are the ones people stop noticing.</blockquote>
+  <cite>Home Gate</cite>
+</div>
+</main>
+
+<nav class="case-next reveal" aria-label="Next case study">
+  <a href="clove.html">
+    <span class="mono-label">Next case study · 02</span>
+    <span class="next-title">Clove</span>
+  </a>
+</nav>
+
+<footer class="mini-footer">
+  <a href="../index.html#work">← All work</a>
+  <span>Samer Shawar · © <span data-year>2026</span></span>
+  <a href="mailto:samer.shawar@gmail.com">samer.shawar@gmail.com</a>
+</footer>
+
+<script src="../assets/js/three.min.js"></script>
+<script src="../js/bg.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

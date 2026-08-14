@@ -521,6 +521,7 @@ body.fx-on .hero .reveal-line > span {
 .tags.cat-amber  { --c: 240, 168, 90; }
 .tags.cat-pink   { --c: 255, 135, 175; }
 .tags.cat-sand   { --c: 206, 160, 114; }
+.tags.cat-coral  { --c: 255, 116, 92; }
 
 .work-row .arrow {
   font-family: var(--font-mono);
