@@ -4,6 +4,15 @@
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---- hero video: honor reduced-motion (poster stays as the still) ---- */
+  if (reduced) {
+    var heroVid = document.querySelector("video.hero-bg");
+    if (heroVid) {
+      heroVid.removeAttribute("autoplay");
+      heroVid.pause();
+    }
+  }
+
   /* ---- scroll reveals ---- */
   var revealables = document.querySelectorAll(".reveal, .reveal-line");
   if ("IntersectionObserver" in window && !reduced) {
