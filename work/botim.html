@@ -41,6 +41,7 @@
   @media (max-width: 640px) { .phones { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; } }
 
   figure.missing img { display: none; }
+  .case-figure.missing::before { aspect-ratio: 16 / 5; }
   figure.missing::before { content: "Export from Figma → assets/img/" attr(data-export); display: flex; align-items: center; justify-content: center; aspect-ratio: 393 / 852; border: 1px dashed var(--hairline); border-radius: 4px; color: var(--ink-faint); font-family: var(--font-mono); font-size: .8rem; padding: 1rem; text-align: center; }
   .case-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 2rem var(--gutter); }
   .case-grid-3 figure { margin: 0; }
