@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>botim send-money redesign · Case study · Samer Shawar</title>
+<meta name="description" content="An independent redesign of botim's international send-money flow: first transfer to a new recipient with a top-up on the way, in English and Arabic. Case study by Samer Shawar.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  /* ---- page-local: phone mocks for the hero, image fallbacks ---- */
+  .phones { display: grid; grid-template-columns: repeat(2, minmax(0, 300px)); gap: 2rem; justify-content: center; padding: 2rem 0 0.5rem; }
+  .phone { --b: #1a6dff; --b600: #0f56d6; --tint: #eaf1ff; --page: #f6f7fa; --sf: #fff; --t: #0b1220; --t2: #6b7385; --line: #dfe3ea;
+    width: 100%; aspect-ratio: 393 / 760; background: var(--page); border-radius: 36px; border: 1px solid var(--hairline);
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,.7); overflow: hidden; color: var(--t); font-family: Inter, system-ui, sans-serif; font-size: 13px; line-height: 1.35;
+    display: flex; flex-direction: column; }
+  .phone[dir="rtl"] { font-family: "Noto Sans Arabic", Inter, sans-serif; }
+  .phone .bar { display: flex; justify-content: space-between; padding: 12px 22px 6px; font-weight: 600; font-size: 12px; }
+  .phone .nav { display: flex; align-items: center; justify-content: center; position: relative; padding: 8px 16px; font-weight: 600; font-size: 14px; }
+  .phone .nav i { position: absolute; left: 16px; top: 50%; width: 9px; height: 9px; border-left: 2px solid #3a4357; border-bottom: 2px solid #3a4357; transform: translateY(-50%) rotate(45deg); }
+  .phone[dir="rtl"] .nav i { left: auto; right: 16px; transform: translateY(-50%) rotate(-135deg); }
+  .phone .body { flex: 1; padding: 8px 14px; display: flex; flex-direction: column; gap: 12px; }
+  .phone .card { background: var(--sf); border-radius: 18px; padding: 16px; box-shadow: 0 2px 8px rgba(10,18,32,.08); }
+  .phone .muted { color: var(--t2); font-size: 11px; }
+  .phone .big { font-size: 30px; font-weight: 600; color: var(--b600); letter-spacing: -.4px; line-height: 1.15; margin: 2px 0; }
+  .phone .row { display: flex; justify-content: space-between; gap: 8px; padding: 9px 2px; }
+  .phone .row + .row { border-top: 1px solid var(--line); }
+  .phone .row b { font-weight: 600; }
+  .phone .recip { display: flex; align-items: center; gap: 10px; }
+  .phone .av { width: 34px; height: 34px; border-radius: 50%; background: var(--tint); color: var(--b600); font-weight: 600; font-size: 11px; display: grid; place-items: center; flex: 0 0 auto; }
+  .phone .pass { text-align: center; margin-top: auto; }
+  .phone .dots { display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
+  .phone .dots s { width: 10px; height: 10px; border-radius: 50%; border: 2px solid #c9ced9; display: block; text-decoration: none; }
+  .phone .dots s.on { background: var(--b); border-color: var(--b); }
+  .phone .foot { background: var(--sf); padding: 10px 14px 20px; }
+  .phone .cta { background: var(--b); color: #fff; font-weight: 600; text-align: center; border-radius: 14px; padding: 13px; font-size: 14px; }
+  .phone .num { font-family: Inter, system-ui, sans-serif; direction: ltr; unicode-bidi: isolate; }
+  @media (max-width: 640px) { .phones { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; } }
+
+  figure.missing img { display: none; }
+  figure.missing::before { content: "Export from Figma → assets/img/" attr(data-export); display: flex; align-items: center; justify-content: center; aspect-ratio: 393 / 852; border: 1px dashed var(--hairline); border-radius: 4px; color: var(--ink-faint); font-family: var(--font-mono); font-size: .8rem; padding: 1rem; text-align: center; }
+  .case-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 2rem var(--gutter); }
+  .case-grid-3 figure { margin: 0; }
+  .case-grid-3 img { width: 100%; border: 1px solid var(--hairline); border-radius: 4px; background: var(--paper-deep); }
+  .case-grid-3 figcaption { font-family: var(--font-mono); font-size: .78rem; color: var(--ink-soft); margin-top: .6rem; }
+  @media (max-width: 760px) { .case-grid-3 { grid-template-columns: 1fr; } }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.25rem; }
+  .decision-grid > div { border-top: 1px solid var(--hairline); padding-top: .9rem; }
+  .decision-grid h3 { font-family: var(--font-mono); font-size: .8rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--signal); margin-bottom: .5rem; }
+  @media (max-width: 640px) { .decision-grid, .pair { grid-template-columns: 1fr; } }
+  .notice { font-family: var(--font-mono); font-size: .8rem; color: var(--ink-faint); border: 1px solid var(--hairline); border-radius: 4px; padding: .7rem 1rem; margin: 1.5rem var(--gutter) 0; max-width: calc(var(--measure) + 10rem); }
+  .notice strong { color: var(--ink-soft); font-weight: 500; }
+  table.flow { width: 100%; border-collapse: collapse; font-size: .92rem; margin-top: 1rem; }
+  table.flow th, table.flow td { text-align: left; padding: .55rem .4rem; border-top: 1px solid var(--hairline); vertical-align: top; }
+  table.flow th { font-family: var(--font-mono); font-weight: 500; font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-faint); border-top: none; }
+  table.flow td:first-child { color: var(--signal); font-family: var(--font-mono); font-size: .8rem; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main">
+  <a class="nav-sig" href="../index.html" aria-label="Samer Shawar, home">
+    <img src="../assets/img/signature.png" alt="Samer Shawar signature">
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work">Work</a></li>
+    <li class="hide-mobile"><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <span class="nav-status">Independent study · 2026</span>
+</nav>
+
+<main>
+<header class="case-hero">
+  <p class="crumbs"><a href="../index.html#work">Work</a> <span class="sep">/</span> Consumer fintech <span class="sep">/</span> Remittance</p>
+  <h1>botim, <em>send money</em></h1>
+  <p class="dek">botim is the UAE's everyday app for calls, chat and, increasingly, money. I redesigned one flow,
+    the first international transfer to a new recipient with a top-up on the way, in English and Arabic,
+    so that the number senders care about, what arrives on the other end, is the first thing they see
+    and the last thing they confirm.</p>
+</header>
+
+<p class="notice"><strong>Independent and unsolicited.</strong> Not affiliated with botim or Astra Tech.
+  Built from the public app, published fact statements and press. A prototype, not a shipped product.</p>
+
+<dl class="case-meta reveal">
+  <div><dt>Role</dt><dd>Solo. Research, flows, UI, design system, RTL</dd></div>
+  <div><dt>Timeline</dt><dd>One week</dd></div>
+  <div><dt>Scope</dt><dd>One flow: Money home → amount → recipient → top-up → review → status, plus the failure state</dd></div>
+  <div><dt>Corridor</dt><dd>UAE → Philippines (GCash) as the worked example; bank and cash pickup covered</dd></div>
+  <div><dt>Deliverable</dt><dd>Figma prototype, 7 screens × 2 languages, token-based component set</dd></div>
+  <div><dt>Status</dt><dd>Prototype. Sender interviews and validation are the next step, not yet done</dd></div>
+</dl>
+
+<div class="phones reveal" aria-label="Review screen, English and Arabic">
+  <div class="phone" dir="ltr">
+    <div class="bar"><span>9:41</span><span>●●● ᯤ ▮</span></div>
+    <div class="nav"><i></i>Review</div>
+    <div class="body">
+      <div class="card">
+        <div class="muted">Maria gets</div>
+        <div class="big">PHP 15,420</div>
+        <div>You send AED 1,000.00</div>
+      </div>
+      <div class="card recip"><span class="av">MS</span><div><b>Maria Santos</b><div class="muted">GCash · +63 917 ••• 2210</div></div></div>
+      <div class="card">
+        <div class="row"><span class="muted">Rate</span><b>1 AED = 15.42 PHP</b></div>
+        <div class="row"><span class="muted">Fee</span><b>AED 0.00</b></div>
+        <div class="row"><span class="muted">Payout</span><b>GCash wallet</b></div>
+        <div class="row"><span class="muted">Arrives</span><b>Usually within minutes</b></div>
+      </div>
+      <div class="pass"><span class="muted">Enter passcode to send</span><div class="dots"><s class="on"></s><s class="on"></s><s></s><s></s><s></s><s></s></div></div>
+    </div>
+    <div class="foot"><div class="cta">Send AED 1,000.00</div></div>
+  </div>
+  <div class="phone" dir="rtl" lang="ar">
+    <div class="bar"><span class="num">9:41</span><span>●●● ᯤ ▮</span></div>
+    <div class="nav"><i></i>مراجعة</div>
+    <div class="body">
+      <div class="card">
+        <div class="muted">تستلم Maria</div>
+        <div class="big"><span class="num">PHP 15,420</span></div>
+        <div>أنت ترسل <span class="num">1,000.00</span> د.إ</div>
+      </div>
+      <div class="card recip"><span class="av">MS</span><div><b>Maria Santos</b><div class="muted">GCash · <span class="num">+63 917 ••• 2210</span></div></div></div>
+      <div class="card">
+        <div class="row"><span class="muted">السعر</span><b><span class="num">1</span> د.إ = <span class="num">15.42 PHP</span></b></div>
+        <div class="row"><span class="muted">الرسوم</span><b><span class="num">0.00</span> د.إ</b></div>
+        <div class="row"><span class="muted">طريقة الاستلام</span><b>محفظة GCash</b></div>
+        <div class="row"><span class="muted">الوصول</span><b>عادةً خلال دقائق</b></div>
+      </div>
+      <div class="pass"><span class="muted">أدخل رمز المرور للإرسال</span><div class="dots"><s class="on"></s><s class="on"></s><s></s><s></s><s></s><s></s></div></div>
+    </div>
+    <div class="foot"><div class="cta">إرسال <span class="num">1,000.00</span> د.إ</div></div>
+  </div>
+</div>
+<p class="notice" style="margin-top:.5rem">The review screen in both languages. Recipient amount biggest, fee and rate on the same screen, and the button says the exact amount leaving the wallet.</p>
+
+<section class="case-section">
+  <span class="label">Why this flow</span>
+  <div class="case-body reveal">
+    <h2>The flow the business <em>is betting on</em></h2>
+    <p>botim started as the UAE's free calling app and now has more than 150 million users. Since the
+      PayBy rebrand to botim money it has been adding remittance corridors fast: GCash for the
+      Philippines, CBE for Ethiopia, Mastercard Move for 150+ countries. International send-money is
+      where the product is investing.</p>
+    <p>Two things in botim's own published material shaped the brief. The international transfer FAQ
+      says the rate and fees appear after the sender enters an amount and a destination. And the Key
+      Facts Statement says a transfer is declined if the wallet is not funded first. So the two moments
+      that matter most to a sender, "what will arrive" and "do I have enough", are both answered late.</p>
+    <p>The audience is mostly migrant workers sending a fixed amount home on a fixed day. One unclear
+      fee, one failed step, costs them a day and sometimes the money. That is why I picked one journey
+      and did it properly rather than touching the whole app.</p>
+    <!-- TODO after the Day 1 audit: screen count from Money tab to "sent", where fee/rate first appear, Arabic truncations seen. -->
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">The problem</span>
+  <div class="case-body reveal">
+    <h2>The right number, <em>in the wrong place</em></h2>
+    <p>Senders don't commit because the number they care about, what arrives on the other end,
+      shows up last and in the sender's currency. Everything else in the redesign follows from fixing
+      that one sentence.</p>
+    <p>The person I designed for is the weekly sender: AED 1,000 to a GCash wallet on a Friday, one hand
+      on the phone, the other on a bus rail, Arabic or English interface depending on who set the phone up.
+      That persona is an assumption built from public evidence, not from interviews yet. The interview
+      script and the recruiting plan are ready; they are the next step.</p>
+    <!-- TODO after interviews: 2 or 3 verbatim quotes, pain points with [N of 8] counts, the journey map figure. -->
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">The hard decision</span>
+  <div class="case-body reveal">
+    <h2>Top up inside the flow, <em>or bounce them out</em></h2>
+    <p>A sender with an empty wallet is the common case, not the edge case. Today the wallet gate sits in
+      front of the send flow: fund first, then come back. I moved funding inside the flow, as one screen
+      that says exactly how much is missing and offers the three ways to close the gap: card, bank
+      transfer, cash at a kiosk.</p>
+    <div class="decision-grid">
+      <div>
+        <h3>What I chose</h3>
+        <p>Inline shortfall. The screen says "You need AED 240 more", shows wallet balance, transfer total and
+          the gap as three plain rows, and the button says "Top up AED 240". Nothing about the transfer is lost.</p>
+      </div>
+      <div>
+        <h3>What I rejected</h3>
+        <p>A separate top-up task. It keeps the send flow light, but it asks the sender to remember a number,
+          leave, fund, come back and re-enter everything. For a weekly sender that is where the week slips.</p>
+      </div>
+      <div>
+        <h3>What I gave up</h3>
+        <p>Card entry and 3DS now live inside a flow that was meant to feel short. The shortfall screen adds a
+          step for the minority who are already funded if the balance check is wrong, and KYC states multiply.</p>
+      </div>
+      <div>
+        <h3>How I'd find out I was wrong</h3>
+        <p>A/B the inline shortfall against the bounce-out with completion of first send as the metric, and
+          watch for a rise in abandoned card entries. If inline loses, the fix is a lighter default (bank transfer
+          first, card second), not a return to the gate.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.5rem">The second decision, fee and rate on the amount screen rather than at review, was easier. It costs
+      a little space on the happy path and kills the drop-off at confirmation. The rate chip sits between the two
+      amounts and opens a "why this rate" sheet, so a sender who has been burned before can check without leaving.</p>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">The flow</span>
+  <div class="case-body reveal">
+    <h2>Seven screens, <em>every branch covered</em></h2>
+    <p>Amount first, then recipient. Exchange houses ask "how much" first, and the senders this flow is
+      for think in amounts, not contacts. Recipient-first is the app convention, and I'd test it, but the
+      default follows the counter.</p>
+    <table class="flow" aria-label="Screens and branches">
+      <tr><th>Screen</th><th>What it settles</th><th>Branches handled</th></tr>
+      <tr><td>01</td><td>Money home: balance, Send, last three recipients as one tap</td><td>empty wallet, no recipients yet</td></tr>
+      <tr><td>02</td><td>Amount: sender pays and recipient gets side by side, rate and fee visible before typing</td><td>rate lock, corridor without a fee</td></tr>
+      <tr><td>03</td><td>Recipient: saved or new, payout method chosen by corridor, inline validation</td><td>wallet · bank · cash pickup, unverified number</td></tr>
+      <tr><td>04</td><td>Shortfall: how much is missing and the three ways to close it</td><td>funded · short · KYC incomplete</td></tr>
+      <tr><td>05</td><td>Review: recipient-gets biggest, fee, rate, arrival, passcode</td><td>rate expired</td></tr>
+      <tr><td>06</td><td>Status: a timeline the sender can trust, with "what to do if" built in</td><td>pending · delivered · share receipt</td></tr>
+      <tr><td>07</td><td>Failure: what happened, is my money safe, what next, who to call</td><td>refunded · retry · support</td></tr>
+    </table>
+    <!-- TODO after the audit: current-state screen count next to the proposed 7. -->
+  </div>
+</section>
+
+<div class="case-grid-2 stage reveal">
+  <figure data-export="botim-01-home-en.png">
+    <img src="../assets/img/botim-01-home-en.png" alt="Money home: wallet balance, Top up and Send, and three recent recipients" onerror="this.closest('figure').classList.add('missing')">
+    <figcaption><span class="stage-tag">01 · Money home</span> Balance and Send above the fold. Last three recipients are one tap, which is the whole flow for a repeat sender.</figcaption>
+  </figure>
+  <figure data-export="botim-02-amount-en.png">
+    <img src="../assets/img/botim-02-amount-en.png" alt="Amount entry with sender pays and recipient gets stacked, a rate and fee chip between them, and a rate-locked banner" onerror="this.closest('figure').classList.add('missing')">
+    <figcaption><span class="stage-tag">02 · Amount</span> Both amounts, the rate and the fee are on screen before the first digit. The chip opens "why this rate".</figcaption>
+  </figure>
+</div>
+<div class="case-grid-2 stage reveal">
+  <figure data-export="botim-03-recipient-en.png">
+    <img src="../assets/img/botim-03-recipient-en.png" alt="Recipient screen with saved contacts, add new, payout method cards and a verified GCash number" onerror="this.closest('figure').classList.add('missing')">
+    <figcaption><span class="stage-tag">03 · Recipient</span> Payout method is chosen by corridor, not by the sender guessing. The number is verified inline, not on submit.</figcaption>
+  </figure>
+  <figure data-export="botim-04-shortfall-en.png">
+    <img src="../assets/img/botim-04-shortfall-en.png" alt="Funding shortfall screen: a warning banner, balance, transfer total and gap, and three top-up methods" onerror="this.closest('figure').classList.add('missing')">
+    <figcaption><span class="stage-tag">04 · Shortfall</span> "You need AED 240 more." The three rows do the arithmetic so the sender doesn't have to.</figcaption>
+  </figure>
+</div>
+<div class="case-grid-2 stage reveal">
+  <figure data-export="botim-06-status-en.png">
+    <img src="../assets/img/botim-06-status-en.png" alt="Transfer status timeline: Sent, Processing, Delivered, with a what-to-do-if block and a share receipt button" onerror="this.closest('figure').classList.add('missing')">
+    <figcaption><span class="stage-tag">06 · Status</span> The "if it is still pending at 9:42 PM" block answers the question before the sender asks support.</figcaption>
+  </figure>
+  <figure data-export="botim-07-failure-en.png">
+    <img src="../assets/img/botim-07-failure-en.png" alt="Failure state: what happened, is my money safe, timeline with a failed step, retry and call support" onerror="this.closest('figure').classList.add('missing')">
+    <figcaption><span class="stage-tag">07 · Failure</span> "Is my money safe?" is answered second, right after "what happened". Then retry, then a phone number.</figcaption>
+  </figure>
+</div>
+
+<section class="case-section">
+  <span class="label">Arabic</span>
+  <div class="case-body reveal">
+    <h2>Arabic as a layout, <em>not a translation</em></h2>
+    <p>Half the value of this flow is in Arabic. Translating strings and flipping the text alignment breaks
+      three things on nearly every money screen, so every component in the system ships as a pair, lang=EN
+      and lang=AR, with the mirrored layout built in rather than applied afterwards.</p>
+    <ul>
+      <li><strong>Mixed-direction amounts.</strong> "AED 1,000.00" inside an Arabic sentence reads backwards unless the
+        number is isolated. Amounts and phone numbers are Latin-digit islands with the currency symbol (د.إ) placed
+        after them, which is how receipts in the UAE actually read.</li>
+      <li><strong>Direction of progress.</strong> Chevrons, the back arrow and the status timeline mirror. The timeline's
+        dots and connector move to the right edge, with the text column filling leftwards.</li>
+      <li><strong>Numerals.</strong> The keypad and all amounts use Western digits in both languages. UAE banking apps are
+        split on this; I chose the digits printed on dirham notes and card receipts. It is a stated decision, and one
+        I'd test with Arabic-first senders.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="case-grid-3 reveal">
+  <figure data-export="botim-02-amount-ar.png">
+    <img src="../assets/img/botim-02-amount-ar.png" alt="Arabic amount entry screen, mirrored, with Latin-digit amounts" loading="lazy" onerror="this.closest('figure').classList.add('missing')">
+    <figcaption>Amount, Arabic. Currency pill on the left, amount reads left to right inside the mirrored row.</figcaption>
+  </figure>
+  <figure data-export="botim-04-shortfall-ar.png">
+    <img src="../assets/img/botim-04-shortfall-ar.png" alt="Arabic funding shortfall screen" loading="lazy" onerror="this.closest('figure').classList.add('missing')">
+    <figcaption>Shortfall, Arabic. The warning line "تحتاج إلى 240 د.إ إضافية" keeps the number as one unit.</figcaption>
+  </figure>
+  <figure data-export="botim-06-status-ar.png">
+    <img src="../assets/img/botim-06-status-ar.png" alt="Arabic transfer status timeline, mirrored to the right edge" loading="lazy" onerror="this.closest('figure').classList.add('missing')">
+    <figcaption>Status, Arabic. Timeline on the right, times in Latin digits with Arabic am/pm.</figcaption>
+  </figure>
+</div>
+
+<section class="case-section">
+  <span class="label">Design system</span>
+  <div class="case-body reveal">
+    <h2>Money components, <em>paired by language</em></h2>
+    <p>I kept botim's visual language where it works, blue on white, rounded cards, lowercase voice, and added
+      the components a money flow needs that a chat app never did. Everything is variables, so when the audited
+      brand values replace my approximations every screen updates at once.</p>
+    <ul>
+      <li><strong>AmountInput:</strong> dual currency, sender amount at 40pt, recipient amount at 28pt in brand blue, rate chip between.</li>
+      <li><strong>RateChip:</strong> rate and fee in one pill, tap for "why this rate".</li>
+      <li><strong>PayoutMethod:</strong> bank, wallet, cash pickup; default and selected states.</li>
+      <li><strong>TimelineStep:</strong> done, current, pending, failed; the subtitle carries the "what to do if" copy.</li>
+      <li><strong>Banner:</strong> success, warning, error; the same three used for rate lock, shortfall and failure.</li>
+      <li>Plus RecipientRow, TopUpMethod, KeyValueRow, buttons, nav and status bar. 12 sets, 36 variants, every one with an Arabic twin.</li>
+    </ul>
+    <div class="method-row" aria-label="Tokens">
+      <span class="method-chip">53 variables</span>
+      <span class="method-chip">22 text styles (EN + AR)</span>
+      <span class="method-chip">44pt tap targets</span>
+      <span class="method-chip">AA contrast on amounts and CTAs</span>
+    </div>
+  </div>
+</section>
+
+<figure class="case-figure stage reveal" data-export="botim-components.png">
+  <img src="../assets/img/botim-components.png" alt="Component sheet: amount input, rate chip, payout method, timeline step and banner, each in English and Arabic" loading="lazy" onerror="this.closest('figure').classList.add('missing')">
+  <figcaption><span class="stage-tag">Components</span> The money-specific set, English and Arabic side by side.</figcaption>
+</figure>
+
+<section class="case-section">
+  <span class="label">Accessibility</span>
+  <div class="case-body reveal">
+    <h2>One hand, <em>on a bus</em></h2>
+    <p>Senders use this one-handed, often in bright light, often on an older Android. So: every tap target is
+      at least 44pt and the primary button is 52pt; amounts and buttons pass AA contrast against white and the
+      tinted blue; the two numbers that matter are the largest text on the screen and still fit at 200% text
+      size; focus order follows the reading order in both directions; and nothing is communicated by colour alone,
+      the failed step has an icon and the words "Not delivered".</p>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">What I'd measure</span>
+  <div class="case-body reveal">
+    <h2>Three tests, <em>four numbers</em></h2>
+    <p>With access to real data, I'd run these before anything else:</p>
+    <ul>
+      <li><strong>Inline shortfall vs separate top-up.</strong> Metric: completion of first international send.</li>
+      <li><strong>Fee and rate on the amount screen vs at review.</strong> Metric: drop-off between amount and review.</li>
+      <li><strong>Amount-first vs recipient-first.</strong> Metric: time to the review screen for new recipients.</li>
+    </ul>
+    <p>And the four numbers I'd watch every week: completion rate, time to first send, repeat send within
+      7 days, and support tickets that contain the word "pending".</p>
+    <!-- TODO after validation sessions: task completion with/without help, time to review, did they say the recipient amount out loud, "would you use this over the exchange house". Real counts only, e.g. 3 of 4. -->
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">What I couldn't know</span>
+  <div class="case-body reveal">
+    <h2>Honest <em>gaps</em></h2>
+    <ul>
+      <li>I don't know botim's real drop-off points. The problem statement is built from how the published flow is
+        described and from what remittance senders say elsewhere, not from botim's funnel.</li>
+      <li>The brand values are approximations. The structure is right, the exact blue is not, until the live app is audited.</li>
+      <li>Rate locks, refund timing and the "2 hours" promise on the status screen are design intent. Whether the partner
+        rails can honour them is a question for the payments team, and the copy would change with the answer.</li>
+      <li>No one has used this yet. The interview script and validation plan exist; the numbers don't, and this page
+        won't show any until they do.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="case-pull reveal">
+  <blockquote>Show the number they care about first. Everything else is layout.</blockquote>
+  <cite>the one-line brief</cite>
+</div>
+</main>
+
+<footer class="mini-footer">
+  <a href="../index.html#work">← All work</a>
+  <span>Samer Shawar · © <span data-year>2026</span></span>
+  <a href="mailto:samer.shawar@gmail.com">samer.shawar@gmail.com</a>
+</footer>
+
+<script src="../assets/js/three.min.js"></script>
+<script src="../js/bg.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>
