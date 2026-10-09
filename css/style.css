@@ -1784,7 +1784,8 @@ body.preview-on .work-preview { opacity: 1; transform: scale(1) rotate(0deg); }
 .cursor-dot, .cursor-disc, .cursor-text { display: none !important; }
 .bg-webgl, .work-gl, .work-preview { display: none !important; }
 .marquee { display: none !important; }
-body { cursor: auto; }
+body.cursor-on { cursor: auto !important; }
+body.cursor-on a, body.cursor-on button, body.cursor-on [role="button"], body.cursor-on label { cursor: pointer !important; }
 
 /* sticky translucent nav */
 .site-nav {
