@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Novaid · AI-Powered AR First Aid · Samer Shawar</title>
-<meta name="description" content="From a HoloLens prototype to Novaid HUD: a hands-free, AI-powered augmented reality system that guides bystanders through first aid with spatial AI and dynamic 3D instructions. Case study by Samer Shawar.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
+<title>Novaid · Co-founding an AI-guided AR first aid platform · Samer Shawar</title>
+<meta name="description" content="How I co-founded Novaid and took hands-free first aid guidance from a HoloLens research prototype to a shipped iOS app with live dispatch, AR annotation and camera-based vitals. Case study by Samer Shawar.">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css?v=fx10">
 </head>
 <body>
 
@@ -21,27 +20,26 @@
     <li class="hide-mobile"><a href="../index.html#about">About</a></li>
     <li><a href="../index.html#contact">Contact</a></li>
   </ul>
-  <span class="nav-status">Case study 03 / 14</span>
+  <span class="nav-status">Case study</span>
 </nav>
 
 <main>
 <header class="case-hero">
-  <p class="crumbs"><a href="../index.html#work">Work</a> <span class="sep">/</span> AI × AR <span class="sep">/</span> Health-tech</p>
+  <p class="crumbs"><a href="../index.html#work">Work</a> <span class="sep">/</span> AI × AR <span class="sep">/</span> Health-tech <span class="sep">/</span> Co-founder</p>
   <h1>Nov<em>aid</em></h1>
-  <p class="dek">Every second counts, every step guided. Novaid is a hands-free augmented reality
-    system that turns an untrained bystander into a guided first responder, a concept I carried
-    from a design-thinking sprint and a working HoloLens prototype all the way to an AI-powered
-    HUD that assesses the patient with spatial AI and overlays step-by-step 3D instructions into
-    the rescuer’s field of view.</p>
+  <p class="dek">Novaid puts first aid instructions in a bystander’s field of view, hands-free, while
+    an AI reads the patient and a dispatcher watches through the same camera. It started as a
+    HoloLens research project. It is now a company I co-founded, incubated at Qatar Science &amp;
+    Technology Park, with a shipped iOS app and a working end-to-end dispatch loop.</p>
 </header>
 
 <dl class="case-meta reveal">
-  <div><dt>Role</dt><dd>Design thinking facilitation, interface design, prototype development, simulation testing</dd></div>
-  <div><dt>Domain</dt><dd>AI × AR · Health-tech wearable</dd></div>
-  <div><dt>Methods</dt><dd>Personas, surveys, interviews, observation, usability testing, high-stress simulation</dd></div>
-  <div><dt>Key tech</dt><dd>Unity, Microsoft HoloLens; spatial AI, facial recognition, dynamic 3D overlays</dd></div>
-  <div><dt>Arc</dt><dd>Research prototype → AI-powered product concept</dd></div>
-  <div><dt>Outcome</dt><dd>Untrained bystanders guided through first aid, hands-free</dd></div>
+  <div><dt>Role</dt><dd>Co-founder & CEO. I lead product and design: research, AR interaction design, prototypes in code, and the AI roadmap.</dd></div>
+  <div><dt>Team</dt><dd>Three co-founders: product and design, operations and government relations, and me.</dd></div>
+  <div><dt>Timeline</dt><dd>Research prototype 2022. Now incubated at Qatar Science & Technology Park.</dd></div>
+  <div><dt>Platform</dt><dd>iOS (Swift, SwiftUI, ARKit, RealityKit), Node/TypeScript backend, LiveKit WebRTC</dd></div>
+  <div><dt>Status</dt><dd>Live MVP, NovaidAssist (iOS)</dd></div>
+  <div><dt>Measures</dt><dd>Time to first correct action, AR annotation drift, guidance latency</dd></div>
 </dl>
 
 <figure class="case-figure reveal">
@@ -53,39 +51,31 @@
   <span class="label">Problem</span>
   <div class="case-body reveal">
     <h2>The gap before the <em>ambulance</em></h2>
-    <p>In medical emergencies, the first few minutes are critical, and bystanders are usually
-      first on the scene, lacking the medical knowledge or confidence to intervene before EMS
-      arrives. First aid fails not because instructions don’t exist, but because in panic people
-      can’t recall them, can’t judge whether they’re doing it right, and can’t hold a phone while
-      both hands are doing compressions.</p>
-    <p>We framed the design space precisely: <strong>support the untrained bystander during the
-      waiting period of the ambulance:</strong> not replacing emergency services, but bridging the
-      gap until they arrive. Hands-free or it doesn’t count.</p>
+    <p>Bystanders are first on the scene in almost every emergency and almost none of them act. The
+      instructions exist. People can’t recall them under panic, can’t tell if they’re doing it
+      right, and can’t hold a phone while both hands are on a chest.</p>
+    <p>So the brief was narrow on purpose: support the untrained bystander for the minutes before EMS
+      arrives. Not a medical device. Not a replacement for dispatch. Hands-free, or it doesn’t
+      count.</p>
   </div>
 </section>
 
 <section class="case-section">
   <span class="label">Research</span>
   <div class="case-body reveal">
-    <h2>Divergent, convergent, <em>repeat</em></h2>
-    <p>I facilitated the design thinking process through alternating steps of divergent and
-      convergent thinking, drawing on a broad battery of methods:</p>
-    <ul>
-      <li><strong>Surveys and interviews</strong> established how people actually behave around emergencies.</li>
-      <li><strong>Personas</strong> kept the untrained bystander, not the paramedic, at the center.</li>
-      <li><strong>Observation</strong> grounded the interaction in real first-aid procedure, including
-        field research on the dispatch side of the EMS gap.</li>
-      <li><strong>Brainstorming</strong> expanded the option space before each convergence.</li>
-    </ul>
-    <p>The converged concept: a heads-up, step-by-step guidance layer rendered in the helper’s
-      field of view, keeping both hands free for the patient.</p>
+    <h2>Where it <em>started</em></h2>
+    <p>The first version was a master’s-level research project. I facilitated a design thinking
+      process with surveys, interviews, personas and field observation, including time in an
+      emergency dispatch control room to understand what the responder on the other end of the call
+      actually needs.</p>
+    <p>The converged concept: step-by-step guidance rendered in the helper’s field of view, with both
+      hands free.</p>
     <div class="method-row" aria-label="Methods used">
       <span class="method-chip">Design thinking</span>
-      <span class="method-chip">Personas</span>
-      <span class="method-chip">Survey</span>
+      <span class="method-chip">Surveys</span>
       <span class="method-chip">Interviews</span>
-      <span class="method-chip">Observation</span>
-      <span class="method-chip">Usability testing</span>
+      <span class="method-chip">Personas</span>
+      <span class="method-chip">Field observation</span>
     </div>
   </div>
 </section>
@@ -102,17 +92,17 @@
 </div>
 
 <section class="case-section">
-  <span class="label">Prototype I</span>
+  <span class="label">Prototype</span>
   <div class="case-body reveal">
     <h2>Proving it on <em>HoloLens</em></h2>
-    <p>The first generation was built on Microsoft HoloLens in Unity, functional AR rather than a
-      video mock-up, so usability tests measured the real thing: legibility of overlays during
-      physical activity, timing of instructions, and whether guidance actually reduced
-      hesitation.</p>
-    <p>It did. <strong>In testing, the prototype gave users confidence in processing first aid.</strong>
-      Participants moved through the procedure with the overlay pacing them instead of freezing at
-      the first step. The prototype also proved a quieter point: the headset was the least
-      important decision in the project. The research underneath it was what worked.</p>
+    <p>We built the first generation in Unity on HoloLens, real AR rather than a video mock-up, so
+      testing measured the real thing: overlay legibility during physical effort, instruction
+      timing, and whether the guidance cut hesitation.</p>
+    <p>Participants moved through the procedure with the overlay pacing them instead of freezing at
+      step one.</p>
+    <p>The quieter lesson: the headset was the least important decision in the project. Nobody carries
+      a HoloLens to an accident. If this was going to work, it had to work on the phone already in
+      their pocket.</p>
   </div>
 </section>
 
@@ -123,50 +113,88 @@
 </div>
 
 <section class="case-section">
-  <span class="label">Prototype II</span>
+  <span class="label">Company</span>
   <div class="case-body reveal">
-    <h2>Then the system learned to <em>see</em></h2>
-    <p>The validated guidance concept raised the next question: <strong>what if the system could also
-      assess the patient?</strong> Novaid HUD is the answer, a completely hands-free, AI-powered AR
-      health-tech system that uses <strong>spatial AI and facial recognition to read the patient’s
-      state</strong>, then overlays dynamic, step-by-step 3D instructions that adapt to what it sees,
-      not just to a static script.</p>
+    <h2>From thesis to <em>co-founder</em></h2>
+    <p>That lesson is why Novaid became a company instead of a paper. I co-founded it with two
+      partners, took it into incubation at Qatar Science & Technology Park, and set three constraints
+      for the product: phone-first, Arabic-first, and built to plug into the national dispatch system
+      rather than around it.</p>
+    <p>My job split three ways: product and design decisions, prototypes in code so the team could
+      test real interactions early, and the pitch and partnership work that keeps a two-year-old
+      company alive.</p>
+  </div>
+</section>
+
+<section class="case-section" id="build">
+  <span class="label">Build</span>
+  <div class="case-body reveal">
+    <h2>What <em>shipped</em></h2>
+    <p>MVP Phase 1 is NovaidAssist, an iOS app plus the backend that connects a bystander, a
+      dispatcher and the patient’s vitals in one call.</p>
+    <p>What’s live:</p>
+    <ul>
+      <li><strong>Hands-free guidance in AR</strong>, with 3D instructions anchored to the scene through the phone camera.</li>
+      <li><strong>A live video and audio link to a dispatcher</strong> over WebRTC, with geo-dispatch so the nearest responder gets the call.</li>
+      <li><strong>Camera-based vital signs</strong> (remote photoplethysmography) read from the patient’s face, with on-device limits and a server-side anomaly check.</li>
+      <li><strong>An end-to-end dispatch loop:</strong> call placed, responder connected, guidance delivered, vitals streamed.</li>
+    </ul>
+    <p>The design problem I’m proudest of is annotation drift. A dispatcher drawing “press here” on
+      the video has to stay on the patient’s chest when the phone moves. I designed a five-tier
+      fallback for anchoring those annotations: LiDAR depth, depth unprojection, feature points,
+      plane estimation, then a camera-space fallback, so the annotation degrades gracefully instead
+      of floating off into the room.</p>
+    <p>I designed this AI-first. Research synthesis, scenario writing and the first working SwiftUI and
+      ARKit prototypes all came out of Claude and Claude Code. Figma came in only for final screens,
+      after the interaction already worked on a device.</p>
   </div>
 </section>
 
 <figure class="case-figure reveal">
   <img src="../assets/img/novaid-1.jpg" alt="View through the AR headset during CPR practice: a compression counter at 30, hand-position icon, and clinician telepresence info">
-  <figcaption>Through the rescuer’s eyes: compression pacing, hand position, and remote clinician context.</figcaption>
+  <figcaption>Through the rescuer’s eyes: compression pacing, hand position, and the dispatcher’s annotations.</figcaption>
 </figure>
 
 <section class="case-section">
   <span class="label">Testing</span>
   <div class="case-body reveal">
     <h2>Designed under <em>stress</em></h2>
-    <p>We rigorously tested the AR interface in high-stress simulation environments. Two findings
-      drove refinement: the visual hierarchy had to <strong>never obscure the patient</strong>, and the
-      AI had to recognize the situation instantly, guidance with latency is guidance that arrives
-      too late.</p>
+    <p>We tested in simulated emergencies, not usability labs. Two findings drove the design:</p>
+    <ul>
+      <li>The interface must never cover the patient. Every overlay is pushed to the edges or anchored off-body.</li>
+      <li>Guidance that arrives late is guidance that didn’t arrive. Latency budgets are a design constraint, not an engineering afterthought.</li>
+    </ul>
   </div>
 </section>
 
 <section class="case-section">
-  <span class="label">Outcome</span>
+  <span class="label">What’s next</span>
   <div class="case-body reveal">
-    <h2>Panic, turned into <em>procedure</em></h2>
-    <p>Novaid effectively bridged the EMS gap: ordinary bystanders empowered with real-time
-      medical guidance, panic turned into structured, life-saving action. From design-thinking
-      sprint to HoloLens prototype to AI-powered HUD, it is the longest research arc in my
-      portfolio, and the clearest proof that <strong>emerging tech is only as good as the research
-      underneath it.</strong></p>
+    <h2>Into the <em>dispatch system</em></h2>
+    <p>Najem, Qatar’s national dispatch system, can’t be connected to directly; every link goes
+      through a government service bus. So the next phase is procurement and integration work as much
+      as product work: a standard outbound payload now, an admin dashboard for responders, and the AI
+      layer (we call it NAI) learning to assess the patient, not just read a pulse.</p>
+  </div>
+</section>
+
+<section class="case-section">
+  <span class="label">What I learned</span>
+  <div class="case-body reveal">
+    <h2>Three <em>things</em></h2>
+    <p>Emerging tech is only as good as the research under it. The HoloLens was a distraction. The
+      dispatch room visit was the whole product.</p>
+    <p>Prototype in code or you’re guessing. An AR interaction in Figma is a drawing. On a phone,
+      pointed at a person, it’s a decision.</p>
+    <p>Founding a company is a design project with a worse feedback loop.</p>
   </div>
 </section>
 </main>
 
 <nav class="case-next reveal" aria-label="Next case study">
-  <a href="lemonada.html">
-    <span class="mono-label">Next case study · 04</span>
-    <span class="next-title">Lemonada</span>
+  <a href="clove.html">
+    <span class="mono-label">Next case study · 02</span>
+    <span class="next-title">Clove</span>
   </a>
 </nav>
 

@@ -6,11 +6,10 @@
 
   /* ---- hero video: honor reduced-motion (poster stays as the still) ---- */
   if (reduced) {
-    var heroVid = document.querySelector("video.hero-bg");
-    if (heroVid) {
-      heroVid.removeAttribute("autoplay");
-      heroVid.pause();
-    }
+    document.querySelectorAll("video.hero-bg, .hv-bg video, .hv-visual video").forEach(function (v) {
+      v.removeAttribute("autoplay");
+      v.pause();
+    });
   }
 
   /* ---- scroll reveals ---- */
